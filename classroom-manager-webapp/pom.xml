@@ -4,7 +4,7 @@
   <parent>
     <groupId>bitcare</groupId>
     <artifactId>classroom-manager</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>classroom-manager-webapp</artifactId>
@@ -12,29 +12,47 @@
   <packaging>war</packaging>
   <dependencies>
     <!-- Add your project specific dependencies here: -->
+      <dependency>
+          <groupId>bitcare</groupId>
+          <artifactId>classroom-manager-module</artifactId>
+      </dependency>
 
     <!-- Overlay Magnolia Empty Webapp. Alternatively, use the bundled-webapp or the enterprise-webapp. Dependencies versions are already imported by parent, so no need to replicate here. -->
     <dependency>
-      <groupId>info.magnolia</groupId>
-      <artifactId>magnolia-empty-webapp</artifactId>
+      <groupId>info.magnolia.bundle</groupId>
+      <artifactId>magnolia-bundled-webapp</artifactId>
       <type>pom</type>
     </dependency>
     <dependency>
-      <groupId>info.magnolia</groupId>
-      <artifactId>magnolia-empty-webapp</artifactId>
+      <groupId>info.magnolia.bundle</groupId>
+      <artifactId>magnolia-bundled-webapp</artifactId>
       <type>war</type>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <configuration>
-          <!-- exclude jars copied "physically" from the webapp overlay - so we only get those resolved by Maven's dependency management -->
-          <dependentWarExcludes>WEB-INF/lib/*.jar</dependentWarExcludes>
-        </configuration>
-      </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+                <!-- exclude jars copied "physically" from the webapp overlay - so we only get those resolved by Maven's dependency management -->
+                <dependentWarExcludes>WEB-INF/lib/*.jar</dependentWarExcludes>
+                <workDirectory>${project.build.directory}/overlays</workDirectory>
+                <webResources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/webapp</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/*.ftl</exclude>
+                        </excludes>
+                    </resource>
+                </webResources>
+            </configuration>
+        </plugin>
     </plugins>
   </build>
 </project>
