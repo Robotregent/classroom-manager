@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module SYSTEM "module.dtd" >
 <module>
-  <name>classroom-manager</name>
-  <displayName>${project.name}</displayName>
-  <description>${project.description}</description>
-  <class>bitcare.ClassroomManager</class>
-  <versionHandler>bitcare.setup.ClassroomManagerVersionHandler</versionHandler>
-  <version>${project.version}</version>
+    <name>classroom-manager</name>
+    <displayName>${project.name}</displayName>
+    <description>${project.description}</description>
+    <class>bitcare.ClassroomManager</class>
+    <versionHandler>bitcare.setup.ClassroomManagerVersionHandler</versionHandler>
+    <version>${project.version}</version>
 
-  <dependencies>
-    <dependency>
-      <name>core</name>
-      <version>5.3.7/*</version>
-    </dependency>
-  <!-- Add other dependencies here, e.g the standard-templating-kit, or the multisite module with the enterprise edition. -->
-  <!--
-    <dependency>
-      <name>standard-templating-kit</name>
-      <version>2.7/*</version>
-    </dependency>
-    <dependency>
-      <name>multisite</name>
-      <version>1.0/*</version>
-    </dependency>
-  -->
-  </dependencies>
+    <dependencies>
+        <dependency>
+            <name>core</name>
+            <version>5.3.7/*</version>
+        </dependency>
+        <!-- Add other dependencies here, e.g the standard-templating-kit, or the multisite module with the enterprise edition. -->
+    </dependencies>
+    <repositories>
+        <repository>
+            <name>magnolia</name>
+            <workspaces>
+                <workspace>classes</workspace>
+            </workspaces>
+            <nodeTypeFile>/mgnl-nodetypes/magnolia-nodetypes.xml</nodeTypeFile>
+        </repository>
+    </repositories>
 </module>
